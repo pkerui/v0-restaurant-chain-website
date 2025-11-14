@@ -4,25 +4,35 @@ import { MapPin, Phone, Clock, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface Store {
-  id: number
+  id: number | string
   name: string
   address: string
   phone: string
   hours: string
   description: string
-  latitude?: number
-  longitude?: number
+  latitude?: number | null
+  longitude?: number | null
+  dianpingUrl?: string | null
+  imageUrl?: string | null
 }
 
 export default function StoreCard({ store }: { store: Store }) {
-  const meituan_url = "#"
-
   return (
     <div className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-      {/* Image Placeholder */}
-      <div className="h-48 bg-gradient-to-br from-secondary to-primary/20 flex items-center justify-center">
-        <span className="text-5xl">🍲</span>
-      </div>
+      {/* Store Image */}
+      {store.imageUrl ? (
+        <div className="w-full aspect-[4/3] overflow-hidden">
+          <img
+            src={store.imageUrl}
+            alt={store.name}
+            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      ) : (
+        <div className="w-full aspect-[4/3] bg-gradient-to-br from-secondary to-primary/20 flex items-center justify-center">
+          <span className="text-5xl">🍲</span>
+        </div>
+      )}
 
       {/* Content */}
       <div className="p-6">
@@ -64,10 +74,15 @@ export default function StoreCard({ store }: { store: Store }) {
               导航
             </Button>
           </a>
-          <a href={meituan_url} className="flex-1">
-            <Button size="sm" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+          <a
+            href={store.dianpingUrl || "https://www.dianping.com/search/keyword/9/0_%E6%BD%AE%E6%9D%A5"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1"
+          >
+            <Button size="sm" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
               <ExternalLink className="w-4 h-4 mr-1" />
-              美团
+              大众点评
             </Button>
           </a>
         </div>

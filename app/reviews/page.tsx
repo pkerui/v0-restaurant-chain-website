@@ -138,6 +138,26 @@ export default function ReviewsPage() {
       {/* All Testimonials */}
       <Testimonials testimonials={testimonials} title="所有顾客评价" />
 
+      {/* Dianping CTA */}
+      <section className="py-16 md:py-20 px-4 md:px-8 bg-secondary/20 border-t border-border">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-4">想看更多真实评价？</h2>
+          <p className="text-lg text-muted-foreground mb-8">
+            访问大众点评，查看数千条来自真实顾客的评价和门店照片
+          </p>
+          <a
+            href="https://www.dianping.com/search/keyword/9/0_%E6%BD%AE%E6%9D%A5"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="bg-accent text-accent-foreground px-8 py-3 rounded-lg font-semibold hover:bg-accent/90 transition-colors inline-flex items-center gap-2">
+              <span>前往大众点评</span>
+              <span>→</span>
+            </button>
+          </a>
+        </div>
+      </section>
+
       <Footer />
     </main>
   )

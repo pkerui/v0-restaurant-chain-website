@@ -1,8 +1,9 @@
 import { Card } from "@/components/ui/card"
-import { Star } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Star, ExternalLink } from "lucide-react"
 
 interface Testimonial {
-  id: number
+  id: number | string
   name: string
   role: string
   content: string
@@ -14,9 +15,17 @@ interface TestimonialsProps {
   testimonials: Testimonial[]
   title?: string
   showLimit?: number
+  showMoreButton?: boolean
+  moreButtonUrl?: string
 }
 
-export default function Testimonials({ testimonials, title = "顾客评价", showLimit }: TestimonialsProps) {
+export default function Testimonials({
+  testimonials,
+  title = "顾客评价",
+  showLimit,
+  showMoreButton = false,
+  moreButtonUrl
+}: TestimonialsProps) {
   const displayedTestimonials = showLimit ? testimonials.slice(0, showLimit) : testimonials
 
   return (
@@ -58,6 +67,25 @@ export default function Testimonials({ testimonials, title = "顾客评价", sho
             </Card>
           ))}
         </div>
+
+        {/* More Button */}
+        {showMoreButton && moreButtonUrl && (
+          <div className="text-center mt-12">
+            <p className="text-foreground text-lg mb-4 max-w-2xl mx-auto font-medium">
+              想看更多真实评价？访问大众点评，查看数千条来自真实顾客的评价和门店照片
+            </p>
+            <a
+              href={moreButtonUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                <ExternalLink className="w-4 h-4 mr-2" />
+                访问大众点评
+              </Button>
+            </a>
+          </div>
+        )}
       </div>
     </section>
   )
